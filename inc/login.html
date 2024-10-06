@@ -8,13 +8,17 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../res/css/login.css">
     <title>Ludiflex | Login & Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="wrapper">
         <nav class="nav">
-            <div class="nav-logo">
-                <p>LOGO .</p>
+            <div class="logo">
+                <img src="../res/img/logo.png" alt="Company Logo">
             </div>
             <div class="nav-menu" id="navMenu">
                 <ul>
@@ -37,78 +41,88 @@
         <div class="form-box">
 
             <!------------------- login form -------------------------->
-
-            <div class="login-container" id="login">
-                <div class="top">
-                    <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>
-                    <header>Login</header>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="usernamel" placeholder="Username or Email">
-                    <i class="bx bx-user"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" class="input-field" id="passwordl" placeholder="Password">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <button type="button" class="submit" id="loginButton" onclick="printCredentials()">Sign in</button>
-                    <!--<input type="submit" class="submit" value="Sign In">-->
-                </div>
-                <div class="two-col">
-                    <div class="one">
-                        <input type="checkbox" id="login-check">
-                        <label for="login-check"> Remember Me</label>
+                <div class="login-container" id="login">
+                    <div class="top">
+                        <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>
+                        <header>Login</header>
                     </div>
-                    <div class="two">
-                        <label><a href="#">Forgot password?</a></label>
-                    </div>
-                </div>
-            </div>
-
-            <!------------------- registration form -------------------------->
-            <div class="register-container" id="register">
-                <div class="top">
-                    <span>Have an account? <a href="#" onclick="login()">Login</a></span>
-                    <header>Sign Up</header>
-                </div>
-                <div class="two-forms">
                     <div class="input-box">
-                        <input type="text" class="input-field" id="firstname" placeholder="Firstname">
+                        <input type="text" class="input-field" id="usernamel" placeholder="Username or Email">
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input-field" id="lastname" placeholder="Lastname">
-                        <i class="bx bx-user"></i>
+                        <input type="password" class="input-field" id="passwordl" placeholder="Password">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <button type="button" class="submit" id="loginButton" onclick="printCredentials()">Sign
+                            in</button>
+                        <!--<input type="submit" class="submit" value="Sign In">-->
+                    </div>
+                    <div class="two-col">
+                        <div class="one">
+                            <input type="checkbox" id="login-check">
+                            <label for="login-check"> Remember Me</label>
+                        </div>
+                        <div class="two">
+                            <label><a href="#">Forgot password?</a></label>
+                        </div>
                     </div>
                 </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="email" placeholder="Email">
-                    <i class="bx bx-envelope"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" class="input-field" id="password-signup" placeholder="Password">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <button type="button" class="submit" id="registerbutton" onclick="printCredentialsRegister()">Register</button>
-                    <!--<input type="submit" class="submit" value="Register">-->
-                </div>
-                <div class="two-col">
-                    <div class="one">
-                        <input type="checkbox" id="register-check">
-                        <label for="register-check"> Remember Me</label>
+            
+                <!------------------- registration form -------------------------->
+                <div class="register-container" id="register">
+                    <div class="top">
+                        <span>Have an account? <a href="#" onclick="login()">Login</a></span>
+                        <header>Sign Up</header>
                     </div>
-                    <div class="two">
-                        <label><a href="#">Terms & conditions</a></label>
+                    <div class="two-forms">
+                        <div class="input-box">
+                            <input type="text" class="input-field" id="salutation" placeholder="Salutation" required>
+                            <i class="bx bx-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="input-field" id="firstname" placeholder="Firstname" required>
+                            <i class="bx bx-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="input-field" id="lastname" placeholder="Lastname" required>
+                            <i class="bx bx-user"></i>
+                        </div>
                     </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="email" placeholder="Email" required>
+                        <i class="bx bx-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" class="input-field" id="password-signup" placeholder="Password" required>
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" class="input-field" id="password-signup1" placeholder="Repeate password"
+                            required>
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <button type="button" class="submit" id="registerbutton"
+                            onclick="printCredentialsRegister()">Register</button>
+                        <!--<input type="submit" class="submit" value="Register">-->
+                    </div>
+                    <div class="two-col">
+                        <div class="one">
+                            <input type="checkbox" id="register-check">
+                            <label for="register-check"> Remember Me</label>
+                        </div>
+                        <div class="two">
+                            <label><a href="#">Terms & conditions</a></label>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
         </div>
         <script>
             function printCredentials() {
-                // Get the values from the input fields
+                // Get the values fsrom the input fields
                 var username = document.getElementById("usernamel").value;
                 var password = document.getElementById("passwordl").value;
 
@@ -119,56 +133,56 @@
 
         </script>
 
- <script>
-        document.getElementById('loginButton').addEventListener('click', function() {
-            const username = document.getElementById('usernamel').value;
-            const password = document.getElementById('passwordl').value;
+        <script>
+            document.getElementById('loginButton').addEventListener('click', function () {
+                const username = document.getElementById('usernamel').value;
+                const password = document.getElementById('passwordl').value;
 
-            // Send data to the backend
-            fetch('http://localhost:8080/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success (e.g., redirect or show a message)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle error (e.g., show an error message)
+                // Send data to the backend
+                fetch('http://localhost:8080/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Handle success (e.g., redirect or show a message)
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Handle error (e.g., show an error message)
+                    });
             });
-        });
-    </script>
-<script>
-        document.getElementById('registerbutton').addEventListener('click', function() {
-            const email = document.getElementById('email').value;
-            const firstname= document.getElementById('firstname').value;
-            const lastname= document.getElementById('lastname').value;
-            const password = document.getElementById("password-signup").value;
+        </script>
+        <script>
+            document.getElementById('registerbutton').addEventListener('click', function () {
+                const email = document.getElementById('email').value;
+                const firstname = document.getElementById('firstname').value;
+                const lastname = document.getElementById('lastname').value;
+                const password = document.getElementById("password-signup").value;
 
-            // Send data to the backend
-            fetch('http://localhost:8080/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, firstname, lastname, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success (e.g., redirect or show a message)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle error (e.g., show an error message)
+                // Send data to the backend
+                fetch('http://localhost:8080/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, firstname, lastname, password })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Handle success (e.g., redirect or show a message)
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Handle error (e.g., show an error message)
+                    });
             });
-        });
-    </script>
+        </script>
         <script>
             function printCredentialsRegister() {
                 // Get the values from the input fields
@@ -223,6 +237,42 @@
                 y.style.opacity = 1;
             }
 
+        </script>
+        <script>
+            // Clientseitige Validierung
+            document.getElementById('registerbutton').addEventListener('click', function (event) {
+
+                console.log("123");
+                /*const password = document.getElementById('password-signup').value;
+                const confirmPassword = document.getElementById('password-signup1').value;
+
+                if (password !== confirmPassword) {
+                    alert('The passwords do not match.');
+                    event.preventDefault(); // Verhindert das Absenden des Formulars
+                }
+                    */
+                //event.preventDefault();
+
+                // Get all input fields
+                const fields = document.querySelectorAll('.input-field');
+                let isValid = true;
+
+                // Loop through each field to check if it's empty
+                fields.forEach(field => {
+                    if (field.value.trim() === '') {
+                        field.classList.add('error'); // Add error class if empty
+                        isValid = false;
+                    } else {
+                        field.classList.remove('error'); // Remove error class if not empty
+                    }
+                });
+
+                // If all fields are valid, you can submit the form or perform other actions
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                    // Here you can submit the form or perform other actions
+                }
+            });
         </script>
 
 </body>

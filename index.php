@@ -1,19 +1,22 @@
+<?php
+session_start(); // Start the session if you are using session variables
+?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PHP Test</title>
-        <script src="jquery.js"></script>
-        <script>
-        $(function(){
-            $("#login").load("./inc/login.html");
-        });
-        </script>
-        
-    </head>
-    <body>
-        <?php echo '<p>test</p>'; ?>
-        <div id="login"></div>
-        <a href="./inc/login.html">login</a><br>
-        <a href="./inc/hilfe.html">hilfe</a><br>
-    </body>
+
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+   <!-- <link rel="stylesheet" href="/vscode/end_projekt/res/css/navigation.css"> -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/end_projekt/res/css/style.css"> <!-- Your custom CSS -->
+</head>
+
+<body>
+    <?php include './inc/navigation.php'; ?>
+</body>
+
 </html>
+

@@ -1,0 +1,40 @@
+/* styles.css */
+
+nav {
+    background-color: #333;
+    /* Dark background */
+    padding: 10px;
+    /* Padding around the menu */
+}
+
+nav ul {
+    list-style-type: none;
+    /* Remove bullet points */
+    margin: 0;
+    /* Remove default margin */
+    padding: 0;
+    /* Remove default padding */
+    display: flex;
+    /* Use flexbox for horizontal layout */
+}
+
+nav ul li {
+    margin-right: 20px;
+    /* Space between menu items */
+}
+
+nav ul li a {
+    color: white;
+    /* Text color */
+    text-decoration: none;
+    /* Remove underline */
+    padding: 8px 16px;
+    /* Padding for clickable area */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    /* Change background on hover */
+}
