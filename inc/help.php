@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help</title>
-    <link rel="stylesheet" href="/vscode/end_projekt/res/css/impressum.css"> 
+    <link rel="stylesheet" href="../res/css/impressum.css"> 
 </head>
 <body>
 
