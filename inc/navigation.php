@@ -1,4 +1,5 @@
 <?php
+session_start();
 $currentDir = dirname($_SERVER['SCRIPT_FILENAME']);
 if (strpos($currentDir, 'inc') !== false) {
     $cssPath = '../';
@@ -7,6 +8,7 @@ if (strpos($currentDir, 'inc') !== false) {
     $cssPath = '';
     $menuPath = 'inc/';
 }
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,8 +35,11 @@ if (strpos($currentDir, 'inc') !== false) {
                 <li><a href="<?php echo $menuPath; ?>help.php">Help</a></li>
                 <li><a href="<?php echo $menuPath; ?>login.php">Login</a></li>
                 <li><a href="<?php echo $menuPath; ?>register.php">Register</a></li>
-                
-
+                <?php if ($isLoggedIn): ?>
+                    <li><a href="<?php echo $menuPath; ?>profile.php">Profile</a></li>
+                    <li><a href="<?php echo $menuPath; ?>room_reg.php">Room Register</a></li>
+                    <li><a href="<?php echo $menuPath; ?>view_room.php">Room view</a></li>
+                <?php endif; ?>
 
             </ul>
         </nav>

@@ -1,4 +1,5 @@
 chech if style.css is useful & needed
-bc of different location from / -> /inc and the other way around, we need 2 nag.php or different login. There is a photo explaining the problem
 add fotos and make css more beautiful
 to see temp.html and to add it to the other files 
+logout button from profile, login and registration shoud not be there 
+commentars delete
