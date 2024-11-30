@@ -17,23 +17,40 @@
 
     if (!isset($_SESSION['submitted_texts'])) {
         $_SESSION['submitted_texts'] = [];
+
+        // Hardcoded information for discounts and images
+        $_SESSION['submitted_texts'][] = [
+            'text' => '20% Discount on Weekday Bookings!',
+            'image' => '../uploads/news/20.jpg'
+        ];
+        $_SESSION['submitted_texts'][] = [
+            'text' => 'Special Offer: Stay 3 Nights, Get 1 Free!',
+            'image' => '../uploads/news/3nights.webp' 
+        ];
+        $_SESSION['submitted_texts'][] = [
+            'text' => 'Family Package: 15% Off for Families!',
+            'image' => '../uploads/news/15.jpg'
+        ];
     }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploaddir = '../uploads/';
         $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
         $uploadedFilePath = '';
-        $imageFileType = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
-        //debug_to_console("filetype ".$imageFileType);
-        echo "<p>type :".$imageFileType.".</p>";
-        //print_r($_FILES);
-        if ($_FILES['userfile']['type'] != "image/png"
-           // $imageFileType != "jpg" || $imageFileType != "png" || $imageFileType != "jpeg"
-            //|| $imageFileType != "gif"
+        $imageFileType = strtolower(pathinfo($uploadfile, PATHINFO_EXTENSION));
+
+        echo "<p>type :" . $imageFileType . ".</p>";
+
+        if (
+            $_FILES['userfile']['type'] != "image/png" &&
+            $imageFileType != "jpg" &&
+            $imageFileType != "jpeg" &&
+            $imageFileType != "gif"
         ) {
             echo "<p>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
             exit();
         }
-            
+
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
             echo "<p>File is valid, and was successfully uploaded.\n</p>";
             $uploadedFilePath = $uploadfile;
@@ -46,32 +63,37 @@
             'text' => $submittedText,
             'image' => $uploadedFilePath
         ];
-
     }
-    if (!empty($_SESSION['submitted_texts'])) {
-        echo '<div class="divUL">';
-        echo "<h2>All Submitted Texts:</h2>";
-        echo "<ul>";
 
-        foreach (array_reverse($_SESSION['submitted_texts']) as $entry) {
-            echo "<li>";
-            echo "<p>" . $entry['text'] . "</p>";
+        if (!empty($_SESSION['submitted_texts'])) {
+            echo '<div class="divUL">';
+            echo "<h2>All Submitted Texts:</h2>";
+            echo "<ul>";
 
-            if (!empty($entry['image'])) {
-                echo "<img src='" . $entry['image'] . "' alt='Uploaded Image' style='max-width: 100%; height: auto;' />";
+            foreach (array_reverse($_SESSION['submitted_texts']) as $entry) {
+                echo "<li>";
+                echo "<p>" . $entry['text'] . "</p>";
+
+                if (!empty($entry['image'])) {
+                    echo "<div class='image-container'>"; // Add a container for the image
+                    echo "<img class='small-image' src='" . $entry['image'] . "' alt='Uploaded Image' />";
+                    echo "</div>"; // Close the image container
+                }
+                echo "</li>"; // Close the list item
             }
-        }
 
-        echo "</ul>";
-        echo "</div>";
-    }
+            echo "</ul>";
+            echo "</div>";
+        }
     ?>
 
-    <h1>Upload Text and Image</h1>
+   <!-- <h1>Upload Text and Image</h1>-->
 
     <?php
     if (isset($_SESSION['isAdmin'])) {
         ?>
+        <h1>Upload Text and Image</h1>
+
         <form action="" method="post" enctype="multipart/form-data">
             <label for="text">Enter your text:</label><br>
             <textarea id="text" name="text" rows="4" cols="50" required></textarea><br><br>

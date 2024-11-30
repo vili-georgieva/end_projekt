@@ -42,4 +42,18 @@ div.divUL ul li {
     padding: 10px;
     border-radius: 5px;
     background-color: #f9f9f9;
+    text-align: center;
+}
+
+.image-container {
+    max-width: 200px;
+    overflow: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.small-image {
+    width: 100%;
+    height: auto;
 }
