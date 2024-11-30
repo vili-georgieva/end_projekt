@@ -22,6 +22,18 @@
         $uploaddir = '../uploads/';
         $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
         $uploadedFilePath = '';
+        $imageFileType = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
+        //debug_to_console("filetype ".$imageFileType);
+        echo "<p>type :".$imageFileType.".</p>";
+        //print_r($_FILES);
+        if ($_FILES['userfile']['type'] != "image/png"
+           // $imageFileType != "jpg" || $imageFileType != "png" || $imageFileType != "jpeg"
+            //|| $imageFileType != "gif"
+        ) {
+            echo "<p>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
+            exit();
+        }
+            
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
             echo "<p>File is valid, and was successfully uploaded.\n</p>";
             $uploadedFilePath = $uploadfile;
@@ -29,7 +41,7 @@
             echo "<p>Possible file upload attack!\n</p>";
         }
         $submittedText = htmlspecialchars($_POST['text']);
-    
+
         $_SESSION['submitted_texts'][] = [
             'text' => $submittedText,
             'image' => $uploadedFilePath
