@@ -9,6 +9,7 @@ if (strpos($currentDir, 'inc') !== false) {
     $menuPath = 'inc/';
 }
 $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+$isAdmin = isset($_SESSION['isAdmin']) === true;
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,10 +37,11 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
                 <li><a href="<?php echo $menuPath; ?>login.php">Login</a></li>
                 <li><a href="<?php echo $menuPath; ?>register.php">Register</a></li>
                 <li><a href="<?php echo $menuPath; ?>news.php">News</a></li>
-                <?php if ($isLoggedIn): ?>
+                <?php if ($isLoggedIn || $isAdmin): ?>
                     <li><a href="<?php echo $menuPath; ?>profile.php">Profile</a></li>
                     <li><a href="<?php echo $menuPath; ?>room_reg.php">Room Register</a></li>
                     <li><a href="<?php echo $menuPath; ?>view_room.php">Room view</a></li>
+                    <li><a href="<?php echo $menuPath; ?>logout.php">Logout</a></li>
                 <?php endif; ?>
 
             </ul>
