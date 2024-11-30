@@ -29,3 +29,17 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #4cae4c;
 }
+
+div.divUL ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+div.divUL ul li {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}

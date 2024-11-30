@@ -2,7 +2,6 @@
 session_start();
 include 'navigation.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $check_in_date = $_POST['check_in_date'];
     $check_out_date = $_POST['check_out_date'];
@@ -11,6 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pets = $_POST['pets'] ?? 'None';
 
     if (strtotime($check_out_date) > strtotime($check_in_date)) {
+        $_SESSION['reservations'][] = [
+            'check_in_date' => $check_in_date,
+            'check_out_date' => $check_out_date,
+            'breakfast' => $breakfast,
+            'parking' => $parking,
+            'pets' => $pets,
+            'status' => 'new'
+        ];
         echo "Reservation successfully created.";
     } else {
         echo "Error: Check-out date must be later than check-in date.";
@@ -20,10 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>New Reservation</title>
     <link rel="stylesheet" href="../res/css/style.css">
 </head>
+
 <body>
     <h2>Create a New Room Reservation</h2>
     <form method="POST">
@@ -45,4 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="submit" value="Submit Reservation">
     </form>
 </body>
+
 </html>

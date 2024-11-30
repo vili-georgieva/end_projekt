@@ -35,6 +35,7 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
                 <li><a href="<?php echo $menuPath; ?>help.php">Help</a></li>
                 <li><a href="<?php echo $menuPath; ?>login.php">Login</a></li>
                 <li><a href="<?php echo $menuPath; ?>register.php">Register</a></li>
+                <li><a href="<?php echo $menuPath; ?>news.php">News</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><a href="<?php echo $menuPath; ?>profile.php">Profile</a></li>
                     <li><a href="<?php echo $menuPath; ?>room_reg.php">Room Register</a></li>
