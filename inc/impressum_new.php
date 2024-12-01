@@ -13,7 +13,7 @@
     <style>
         .container {
             display: flex;
-            justify-content: left;
+            justify-content: center;
             /* Center the images */
             align-items: center;
             /* Align images vertically */
@@ -40,20 +40,21 @@
     <?php include 'navigation.php'; ?>
     <div class="impressum-photo">
         <div class="container">
-           
+            <div class="card mx-2" style="max-width: 250px;">
                 <img src="..\res\img\impressum_vili.jpg" alt="Team member Velichka Georgieva" class="card-img-top mx-auto d-block">
-              
+                <div class="card-body">
                     <h4 class="card-title">Velichka Georgieva</h4>
                     <p class="card-text">Team member</p>
                     <a href="mailto:if24b265@technikum-wien.at" class="btn btn-primary">Send me a mail</a>
-           
-        </div>
-        <div class="card" style="max-width:250px">
-            <img src="..\res\img\impressum_fpm.webp" alt="Team member Filipe Portela Millinger" class="card-img-top mx-auto d-block">
-            <div class="card-body">
-                <h4 class="card-title">Filipe Portela Millinger</h4>
-                <p class="card-text">Team member</p>
-                <a href="mailto:if23b116@technikum-wien.at" class="btn btn-primary">Send me a mail</a>
+                </div>
+            </div>
+            <div class="card mx-2" style="max-width: 250px;">
+                <img src="..\res\img\impressum_fpm.webp" alt="Team member Filipe Portela Millinger" class="card-img-top mx-auto d-block">
+                <div class="card-body">
+                    <h4 class="card-title">Filipe Portela Millinger</h4>
+                    <p class="card-text">Team member</p>
+                    <a href="mailto:if23b116@technikum-wien.at" class="btn btn-primary">Send me a mail</a>
+                </div>
             </div>
         </div>
     </div>
