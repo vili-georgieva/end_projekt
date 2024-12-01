@@ -1,46 +1,37 @@
-<?php
-session_start();
-$images = [
-    "res/img/hotel1.webp",
-    "res/img/hotel2.jpg",
-    "res/img/hotel3.jpg",
-    "res/img/hotel4.jpg",
-    "res/img/hotel5.jpg",
-];
-
-$currentIndex = isset($_GET['index']) ? (int) $_GET['index'] : 0;
-
-if ($currentIndex >= count($images)) {
-    $currentIndex = 0;
-}
-
-if ($currentIndex < 0) {
-    $currentIndex = count($images) - 1;
-}
-
-$currentImage = $images[$currentIndex];
-?>
 <!DOCTYPE html>
 <html>
 
-<head>
-    <link rel="stylesheet" href="res/css/index.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking</title>
-</head>
+<?php include 'inc/head.php'; ?>
 
 <body>
     <?php include './inc/navigation.php'; ?>
 
-    <div class="gallery">
-        <img id="galleryImage" src="<?php echo $currentImage; ?>" alt="Gallery Image">
-        <div class="nav left">
-            <a href="?index=<?php echo $currentIndex - 1; ?>">&#10094;</a>
+    <div id="hotelpics" class="carousel slide mt-3" data-bs-ride="carousel" style="">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hotelpics" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#hotelpics" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#hotelpics" data-bs-slide-to="2"></button>
         </div>
-        <div class="nav right">
-            <a href="?index=<?php echo $currentIndex + 1; ?>">&#10095;</a>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="res\img\room.webp" alt="room" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="res\img\pool.jpg" alt="Pool" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="res\img\pool_out.jpg" alt="Outside Pool" class="d-block" style="width:100%">
+            </div>
         </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#hotelpics" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hotelpics" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
 </body>
 
