@@ -37,6 +37,18 @@
         $password = trim($_POST['password']);
         $salutation = trim($_POST['salutation']);
         $errors = [];
+        function debug_to_console($data)
+        {
+            $output = $data;
+            if (is_array($output))
+                $output = implode(',', $output);
+
+            echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+        }
+       
+        $hashToStoreInDb = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        //echo $hashToStoreInDb;
+        debug_to_console($hashToStoreInDb);
 
         if (!isUsernameUnique($username, $_SESSION['registeredUsers'])) {
             $errors[] = "Error: Username '$username' is already taken.";
@@ -51,13 +63,14 @@
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }
-        $sq = "INSERT INTO `reg` 
+       
+        $sq = "INSERT INTO $tableName 
         (`salutation`, `firstname`, `lastname`,
-         `usernme`, `email`, `passwort`) VALUES 
+         `usernme`, `email`, `passwort`, `isAdmin`) VALUES 
          ('$salutation', '$firstName', '$lastName', '$username', 
-         '$email', '$password')";
-         $result = $db_obj->query($sq);
-
+         '$email', '$hashToStoreInDb', '0')";
+        $result = $db_obj->query($sq);
+       
     }
 
     if (isset($_SESSION['errors'])) {

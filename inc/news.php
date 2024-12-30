@@ -39,7 +39,7 @@ t<html lang="en">
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $newsCounter = $_SESSION['newsCounter'];
+
         $uploaddir = '../uploads/';
         $photoName = basename($_FILES['userfile']['name']);
         $uploadfile = $uploaddir . $photoName;
@@ -71,10 +71,12 @@ t<html lang="en">
             'date' => $currentDate,
             'image' => $uploadedFilePath
         ];
+        $_SESSION['newsCounter']++;
+        $newsCounter = $_SESSION['newsCounter'];
         $sql = "INSERT INTO `news` (`id`, `text`, `photoname`, `photodir`, `date`)
         VALUES ('$newsCounter', '$submittedText', '$photoName', '$uploadedFilePath', '$currentDate')";
         $result = $db_obj->query($sql);
-        $_SESSION['newsCounter']++;
+
     }
 
     if (!empty($_SESSION['submitted_texts'])) {

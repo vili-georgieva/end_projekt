@@ -12,12 +12,11 @@
 
     <?php
     session_start();
+    $tableName = 'reg';
+    require_once('../config/dbaccess.php'); //to retrieve connection details
+    $db_obj = new mysqli($host, $user, $password, $database);
     include 'navigation.php';
 
-    $hardcodedEmail = "user@example.com";
-    $hardcodedPassword = "password123";
-    $hardcodedFirstName = "John";
-    $hardcodedLastName = "Doe";
     //
     if (!isset($_SESSION['user_logged_in']) && !isset($_SESSION['isAdmin'])) {
         echo "<h2>Please log in to view your profile.</h2>";
@@ -30,38 +29,63 @@
     } else {
         echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
     }
+    if ($_SESSION['isAdmin']) {
+        $email = $_SESSION['admin_email'];
+    } else {
+        $email = $_SESSION['user_logged_in'];
+    }
+
+    $sqlName = "SELECT firstname,lastname FROM $tableName WHERE email='$email'";
+    $result = $db_obj->query($sqlName);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    $firstName = $row['firstname'];
+    $lastName = $row['lastname'];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['update_profile'])) {
             $newFirstName = trim($_POST['first_name']);
             $newLastName = trim($_POST['last_name']);
             echo "<p>Profile updated: $newFirstName $newLastName</p>";
+            $sql = "UPDATE `reg` SET firstname='$newFirstName', lastname ='$newLastName' WHERE email='$email'";
+            $result = $db_obj->query($sql);
         } elseif (isset($_POST['change_password'])) {
             $oldPassword = trim($_POST['old_password']);
             $newPassword = trim($_POST['new_password']);
             $repeatNewPassword = trim($_POST['repeat_new_password']);
 
-            if ($oldPassword !== $hardcodedPassword) {
+            //
+    
+
+
+            //echo "first : ". $firstName . $lastName;
+            //
+            $sq = "SELECT passwort FROM `reg` WHERE email='$email'";
+            $result = $db_obj->query($sq);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            $currentPass = $row['passwort'];
+            if ($oldPassword !== $currentPass) {
                 echo "<p class='error'>Error: Old password is incorrect.</p>";
             } elseif ($newPassword !== $repeatNewPassword) {
                 echo "<p class='error'>Error: New passwords do not match.</p>";
             } else {
                 echo "<p>Password changed successfully!</p>";
-                $hardcodedPassword = $newPassword;
+                $sql = "UPDATE `reg` SET passwort='$newPassword' WHERE email='$email'";
+                $result = $db_obj->query($sql);
             }
         }
+
     }
     ?>
 
     <h3>Your Profile</h3>
     <form method="post">
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name"
-            value="<?php echo htmlspecialchars($hardcodedFirstName); ?>" required>
+        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($firstName); ?>"
+            required>
         <br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($hardcodedLastName); ?>"
-            required>
+        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($lastName); ?>" required>
         <br>
         <br>
         <br>

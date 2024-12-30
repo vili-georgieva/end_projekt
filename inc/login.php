@@ -17,7 +17,8 @@
 
         <?php
         session_start();
-        $_SESSION['co'] = 0;
+
+
         $tableName = 'reg';
         require_once('../config/dbaccess.php'); //to retrieve connection details
         $db_obj = new mysqli($host, $user, $password, $database);
@@ -30,14 +31,19 @@
 
             echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
         }
-
-
+        $sql = " SELECT id FROM `rooms`  ORDER BY ID DESC LIMIT 1";
+        $result = $db_obj->query($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $_SESSION['co'] = $row['id'];
         if (isset($_SESSION['user_logged_in'])) {
             debug_to_console("user");
             echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
         } else if (isset($_SESSION['isAdmin'])) {
             debug_to_console("isAdmin: " . $_SESSION['isAdmin']);
-            $_SESSION['newsCounter'] = 0;
+            $sql = " SELECT id FROM `news`  ORDER BY ID DESC LIMIT 1";
+            $result = $db_obj->query($sqlName);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            $_SESSION['newsCounter'] = $row['id'];
             echo "<h2>Welcome,admin!</h2>";
         } else {
             debug_to_console("eLSe");
@@ -64,22 +70,26 @@
                 while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                     $rows[] = $row;
                 }
-
+                echo "test";
                 $emailFound = false;
-                $passwordFound = false;
+                $isPasswordCorrect = false;
+                $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                debug_to_console($password_hash);
+                echo $password_hash;
+                echo "test";
                 foreach ($rows as $row) {
-
                     if ($row['email'] === $email) {
-                        if ($row['passwort'] === $password) {
+                        $isPasswordCorrect = password_verify($_POST['password'], $row['passwort']);
+                        if ($isPasswordCorrect) {
                             $emailFound = true;
-                            $passwordFound = true;
+                            $isPasswordCorrect = true;
                             break;
                         }
 
                     }
                 }
                 $isAdmin = $result_isAdmin->fetch_array(MYSQLI_ASSOC);
-                if ($emailFound && $passwordFound) {
+                if ($emailFound && $isPasswordCorrect) {
                     if ($isAdmin['isAdmin']) {
                         $_SESSION['isAdmin'] = true;
                         $_SESSION['admin_email'] = $email;

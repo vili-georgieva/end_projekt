@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Време на генериране: 30 дек 2024 в 13:49
+-- Време на генериране: 30 дек 2024 в 19:59
 -- Версия на сървъра: 8.0.40-0ubuntu0.24.04.1
 -- Версия на PHP: 8.3.6
 
@@ -69,9 +69,9 @@ CREATE TABLE `reg` (
 --
 
 INSERT INTO `reg` (`salutation`, `firstname`, `lastname`, `usernme`, `email`, `passwort`, `isAdmin`) VALUES
-('Ms.', 'velichka', 'georgieva', 'admin', 'admin@admin', 'admin', 1),
-('Mr', 'eedds', 'gfdsd', 'fwfwf', 'ko@nd', '12345', 0),
-('Mr.', 'Sheldon', 'Cooper', 'She', 'sheldon@cooper.com', '1234', 0);
+('Mr', 'ad', 'ad', 'ad', 'ad@ad', '$2y$10$ZNF.HSmTQmGrRuhYYQcFRejlHyDf14M5kBFCvnBRbKyyjz2.czLPC', 0),
+('Ms', 'Velichka', 'Georgieva', 'admin', 'admin@admin', '$2y$10$VciUhm6B9Ry6qMtcUWej1uENHDTZb6rTfXfh2771i6nXcAXUakA/u', 1),
+('Mr', 's', 's', 's', 's@s', '$2y$10$jfNLYHeX8V97JyWrbklpDOp5gJezEcGizUy.GEBBg75pP.viB2ose', 0);
 
 -- --------------------------------------------------------
 
@@ -86,16 +86,19 @@ CREATE TABLE `rooms` (
   `parking` varchar(10) NOT NULL,
   `pets` varchar(100) NOT NULL,
   `id` int NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `date` datetime NOT NULL,
+  `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Схема на данните от таблица `rooms`
 --
 
-INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`) VALUES
-('2024-12-11', '2024-12-20', 'No', 'No', '', 4, 'new'),
-('2024-12-10', '2024-12-26', 'Yes', 'Yes', 'ss', 5, 'new');
+INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) VALUES
+('2024-12-11', '2024-12-19', 'Yes', 'No', '', 12, 'new', '2024-12-30 00:00:00', ''),
+('2025-01-01', '2025-01-02', 'Yes', 'No', '', 1, 'new', '2024-12-30 19:12:36', ''),
+('2024-12-04', '2024-12-14', 'No', 'Yes', 'a', 13, 'new', '2024-12-30 19:18:48', 's@s');
 
 --
 -- Indexes for dumped tables

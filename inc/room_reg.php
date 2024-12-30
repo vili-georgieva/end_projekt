@@ -17,23 +17,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //$pets = $_POST['pets'];
     if (strtotime($check_out_date) > strtotime($check_in_date)) {
+        $currentDate = date("Y-m-d H:i:s");
         $_SESSION['reservations'][] = [
             'check_in_date' => $check_in_date,
             'check_out_date' => $check_out_date,
             'breakfast' => $breakfast,
             'parking' => $parking,
             'pets' => $pets,
-            'status' => 'new'
+            'status' => 'new',
+            //'date' => $currentDate
         ];
         $_SESSION['co']++;
         $counter = $_SESSION['co'];
-        echo "Reservation successfully created.";
+        echo "<h2>Reservation successfully created.</h2>";
         //echo $check_in_date, $check_out_date, $breakfast, $parking, $pets;
         //$sq = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`) 
         //VALUES ('2022-10-10', '2022-11-12', 'a', '$parking' , 'a')";
-        $sql = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`) 
+        if ($_SESSION['isAdmin']) {
+            $email = $_SESSION['admin_email'];
+        } else {
+            $email = $_SESSION['user_logged_in'];
+        }
+        $sql = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) 
         VALUES ('$check_in_date', '$check_out_date', 
-        '$breakfast', '$parking', '$pets',  '$counter', 'new')";
+        '$breakfast', '$parking', '$pets',  '$counter', 'new', '$currentDate', '$email')";
         //echo $check_in_date;
         $result = $db_obj->query($sql);
         //echo "aaaa";
