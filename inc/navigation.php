@@ -46,15 +46,27 @@ $isAdmin = isset($_SESSION['isAdmin']) === true;
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo $menuPath; ?>help.php">Help</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo $menuPath; ?>login.php">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo $menuPath; ?>register.php">Register</a>
-                </li>
+                <?php if (!$isLoggedIn && !$isAdmin): ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo $menuPath; ?>login.php">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo $menuPath; ?>register.php">Register</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo $menuPath; ?>news.php">News</a>
                 </li>
+                <?php if ($isLoggedIn || $isAdmin): ?>
+                    <li class="nav-item active"><a class="nav-link" href="<?php echo $menuPath; ?>profile.php">Profile</a>
+                    </li>
+                    <li class="nav-item active"><a class="nav-link" href="<?php echo $menuPath; ?>room_reg.php">Room
+                            Register</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="<?php echo $menuPath; ?>view_room.php">Room
+                            view</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="<?php echo $menuPath; ?>logout.php">Logout</a>
+                    </li>
+                <?php endif; ?>
 
 
             </ul>
