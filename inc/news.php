@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-t<html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Text and Image</title>
+    <?php include 'head.php'; ?>
     <link rel="stylesheet" href="../res/css/style.css">
 </head>
 

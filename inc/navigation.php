@@ -26,27 +26,40 @@ $isAdmin = isset($_SESSION['isAdmin']) === true;
 </head>
 
 <body>
-    <div— class="jumbotron text-center">
 
 
-        <nav>
-            <ul>
-                <li><a href="<?php echo $cssPath; ?>index.php">Home</a></li>
-                <li><a href="<?php echo $menuPath; ?>impressum.php">Impressum</a></li>
-                <li><a href="<?php echo $menuPath; ?>help.php">Help</a></li>
-                <li><a href="<?php echo $menuPath; ?>login.php">Login</a></li>
-                <li><a href="<?php echo $menuPath; ?>register.php">Register</a></li>
-                <li><a href="<?php echo $menuPath; ?>news.php">News</a></li>
-                <?php if ($isLoggedIn || $isAdmin): ?>
-                    <li><a href="<?php echo $menuPath; ?>profile.php">Profile</a></li>
-                    <li><a href="<?php echo $menuPath; ?>room_reg.php">Room Register</a></li>
-                    <li><a href="<?php echo $menuPath; ?>view_room.php">Room view</a></li>
-                    <li><a href="<?php echo $menuPath; ?>logout.php">Logout</a></li>
-                <?php endif; ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $cssPath; ?>index.php">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $menuPath; ?>impressum_new.php">Impressum</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $menuPath; ?>help.php">Help</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $menuPath; ?>login.php">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $menuPath; ?>register.php">Register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $menuPath; ?>news.php">News</a>
+                </li>
+
 
             </ul>
-        </nav>
         </div>
+    </nav>
 </body>
 
 </html>

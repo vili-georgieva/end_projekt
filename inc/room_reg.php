@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>New Reservation</title>
     <link rel="stylesheet" href="../res/css/style.css">
+    <?php include 'head.php'; ?>
 </head>
 
 <body>

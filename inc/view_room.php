@@ -29,3 +29,7 @@ if (!empty($rows)) {
     echo "<p>No reservations found.</p>";
 }
 ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
