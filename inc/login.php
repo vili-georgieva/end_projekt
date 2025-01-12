@@ -12,20 +12,18 @@
 <body>
 
     <?php include 'navigation.php'; ?>
+    <?php include 'db.php'; ?>
     <h1 class="text-center">Login</h1>
     <div class="login-container">
         <?php
         session_start();
         $tableName = 'reg';
-        require_once('../config/dbaccess.php'); //to retrieve connection details
-        $db_obj = new mysqli($host, $user, $password, $database);
         // fucntion for debugging purposes
         function debug_to_console($data)
         {
             $output = $data;
             if (is_array($output))
                 $output = implode(',', $output);
-
             echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
         }
         $sql = " SELECT id FROM `rooms`  ORDER BY ID DESC LIMIT 1";
@@ -34,7 +32,7 @@
         $_SESSION['co'] = $row['id'];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email = trim($_POST['email']);
+            $email = trim($_POST['email']);//trim() remove whitespace
             $password = trim($_POST['password']);
             $errors = [];
             $sql = "SELECT email,passwort FROM $tableName";
@@ -76,6 +74,7 @@
         }
 
         if (isset($_SESSION['user_logged_in'])) {
+            //htmlspecialchars() function in PHP is used to convert special characters to HTML entities
             echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
         } else if (isset($_SESSION['isAdmin'])) {
             ("isAdmin: " . $_SESSION['isAdmin']);

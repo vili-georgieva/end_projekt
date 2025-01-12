@@ -13,12 +13,9 @@
 
     <?php
     session_start();
+    include 'db.php';
     $tableName = 'reg';
-    require_once('../config/dbaccess.php'); //to retrieve connection details
-    $db_obj = new mysqli($host, $user, $password, $database);
     include 'navigation.php';
-
-    //
     if (!isset($_SESSION['user_logged_in']) && !isset($_SESSION['isAdmin'])) {
         echo "<h2>Please log in to view your profile.</h2>";
         echo '<a href="login.php">Login</a>';
@@ -26,9 +23,11 @@
     }
 
     if ($_SESSION['isAdmin']) {
-        echo "<h2>Welcome, " . htmlspecialchars($_SESSION['admin_email']) . "!</h2>";
+        echo "<h2 style='text-align: center;'>Welcome, " . htmlspecialchars($_SESSION['admin_email']) . "!</h2>";
+
     } else {
-        echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
+        echo "<h2 style='text-align: center;'>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
+
     }
     if ($_SESSION['isAdmin']) {
         $email = $_SESSION['admin_email'];
@@ -55,7 +54,7 @@
             $oldPassword = trim($_POST['old_password']);
             $newPassword = trim($_POST['new_password']);
             $repeatNewPassword = trim($_POST['repeat_new_password']);
-            // SQL query for selecting the password for specific email
+            // selecting the password for specific email
             $sq = "SELECT passwort FROM `reg` WHERE email='$email'";
             // run the query
             $result = $db_obj->query($sq);
@@ -79,22 +78,23 @@
     }
     ?>
 
-    <h3>Your Profile</h3>
+    <h3 style='text-align: center;'>Your Profile</h3>
+
     <form method="post">
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($newFirstName); ?>"
-            required>
+        <input type="text" id="first_name" name="first_name"
+            value="<?php echo htmlspecialchars(!empty($newFirstName) ? $newFirstName : $firstName); ?>" required>
         <br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($newLastName); ?>"
-            required>
+        <input type="text" id="last_name" name="last_name"
+            value="<?php echo htmlspecialchars(!empty($newLastName) ? $newLastName : $lastName); ?>" required>
         <br>
         <br>
         <br>
         <input type="submit" name="update_profile" value="Update Profile">
     </form>
+    <h3 style='text-align: center;'>Change Password</h3>
 
-    <h3>Change Password</h3>
     <form method="post">
         <label for="old_password">Old Password:</label>
         <input type="password" id="old_password" name="old_password" required>

@@ -14,19 +14,12 @@
     <?php
     session_start();
     include 'navigation.php';
+    include 'db.php';
     $tableName = 'reg';
-    require_once('../config/dbaccess.php'); //to retrieve connection details
-    $db_obj = new mysqli($host, $user, $password, $database);
-    if ($db_obj->connect_error) {
-        echo "Connection Error: " . $db_obj->connect_error;
-        exit();
-    }
-
     function isEmailUnique($newEmail, $registeredUsers)
     {
         return !in_array($newEmail, $registeredUsers);
     }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = trim($_POST['username']);
         $firstName = trim($_POST['first_name']);
@@ -75,7 +68,7 @@
     }
     ?>
 
-    <h1>Register</h1>
+    <h1 style='text-align: center;'>Register</h1>
     <form action="" method="post">
         <label for="salutation">Salutation:</label>
         <select id="salutation" name="salutation" required>

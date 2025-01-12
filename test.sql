@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Време на генериране: 12 яну 2025 в 15:27
+-- Време на генериране: 12 яну 2025 в 16:14
 -- Версия на сървъра: 8.0.40-0ubuntu0.24.04.1
 -- Версия на PHP: 8.3.6
 
@@ -80,7 +80,7 @@ CREATE TABLE `rooms` (
   `parking` varchar(10) NOT NULL,
   `pets` varchar(100) NOT NULL,
   `id` int NOT NULL,
-  `status` varchar(10) NOT NULL,
+  `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` datetime NOT NULL,
   `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -90,10 +90,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) VALUES
-('2024-12-04', '2024-12-14', 'No', 'Yes', 'a', 13, 'new', '2024-12-30 19:18:48', 's@s'),
-('2025-01-16', '2025-01-23', 'Yes', 'No', '', 14, 'new', '2025-01-09 09:37:01', 's@s'),
-('2025-01-14', '2025-01-30', 'No', 'No', '', 15, 'new', '2025-01-12 09:33:21', 'v@v'),
-('2025-01-14', '2025-01-23', 'Yes', 'Yes', 'd', 16, 'new', '2025-01-12 09:36:59', 'admin@admin');
+('2024-12-04', '2024-12-14', 'No', 'Yes', 'done', 13, 'new', '2024-12-30 19:18:48', 's@s'),
+('2025-01-16', '2025-01-23', 'Yes', 'No', 'in progress', 14, 'new', '2025-01-09 09:37:01', 's@s'),
+('2025-01-14', '2025-01-30', 'No', 'No', '', 15, 'done', '2025-01-12 09:33:21', 'v@v'),
+('2025-01-14', '2025-01-23', 'Yes', 'Yes', 'd', 16, 'in progress', '2025-01-12 09:36:59', 'admin@admin');
 
 --
 -- Indexes for dumped tables

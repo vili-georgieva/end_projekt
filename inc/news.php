@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Text and Image</title>
+    <title>News</title>
     <?php include 'head.php'; ?>
     <link rel="stylesheet" href="../res/css/style.css">
 </head>
@@ -13,15 +13,13 @@
     <?php
 
     include 'navigation.php';
+    include 'db.php';
     session_start();
     $tableName = 'news';
-    require_once('../config/dbaccess.php'); //to retrieve connection details
-    $db_obj = new mysqli($host, $user, $password, $database);
-
     if (!isset($_SESSION['submitted_texts'])) {
         $_SESSION['submitted_texts'] = [];
 
-        // Hardcoded information for discounts and images
+        //hardcoded information for discounts and images
         $_SESSION['submitted_texts'][] = [
             'text' => '20% Discount on Weekday Bookings!',
             'image' => '../uploads/news/20.jpg',
@@ -42,10 +40,10 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $uploaddir = '../uploads/news/';
-        $photoName = basename($_FILES['userfile']['name']);
-        $uploadfile = $uploaddir . $photoName;
+        $photoName = basename($_FILES['userfile']['name']);//basename() function in PHP is used to return the trailing name component of a path
+        $uploadfile = $uploaddir . $photoName;//full path by concatenating the directory and file name.
         $uploadedFilePath = '';
-        $imageFileType = strtolower(pathinfo($uploadfile, PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($uploadfile, PATHINFO_EXTENSION)); //strtolower() function in PHP is used to convert all characters in a string to lowercase
         if (
             $_FILES['userfile']['type'] != "image/png" &&
             $imageFileType != "jpg" &&
@@ -114,7 +112,7 @@
 
     if (!empty($_SESSION['submitted_texts'])) {
         echo '<div class="divUL">';
-        echo "<h2>All Submitted Texts:</h2>";
+        echo "<h2 style='text-align: center;'>All Submitted Texts:</h2>";
         echo "<ul>";
 
         foreach (array_reverse($_SESSION['submitted_texts']) as $entry) {
@@ -150,7 +148,7 @@
     <?php
     if (isset($_SESSION['isAdmin'])) {
         ?>
-        <h1>Upload Text and Image</h1>
+        <h1 style='text-align: center;'>Upload Text and Image</h1>
 
         <form action="" method="post" enctype="multipart/form-data">
             <label for="text">Enter your text:</label><br>
