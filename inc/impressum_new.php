@@ -88,7 +88,7 @@
   
 
     <footer>
-        <p style="color: red;">Verbraucher haben die Möglichkeit,
+        <p class="text-center" style="color: red;">Verbraucher haben die Möglichkeit,
             Beschwerden an die Online-Streitbeilegungsplattform der EU zu richten:
             <a href="http://ec.europa.eu/odr">Online-Streitbeilegung</a> <br>
             Sie können allfällige Beschwerde auch an

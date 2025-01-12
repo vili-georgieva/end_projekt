@@ -35,8 +35,12 @@
     }
 
     if (!empty($rows)) {
+        echo "<div class='container mt-5'>";
         foreach ($rows as $row) {
-            echo "<p>Reservation ID: " . $row['id'] . " - Status: {$row['status']}";
+            echo "<div class='border p-3 rounded bg-light'>";
+
+
+            echo "<p class='text-dark font-weight-bold'>Reservation ID: " . $row['id'] . " - Status: {$row['status']}";
             if ($_SESSION['isAdmin']) {
                 echo " - User: " . $row['email'];
             }
@@ -55,7 +59,9 @@
                 echo "</form>";
             }
             echo "</p>";
+            echo "</div>";
         }
+        echo "</div>";
     } else {
         echo "<p>No reservations found.</p>";
     }
