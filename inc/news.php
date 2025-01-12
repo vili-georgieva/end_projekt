@@ -41,14 +41,11 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $uploaddir = '../uploads/';
+        $uploaddir = '../uploads/news/';
         $photoName = basename($_FILES['userfile']['name']);
         $uploadfile = $uploaddir . $photoName;
         $uploadedFilePath = '';
         $imageFileType = strtolower(pathinfo($uploadfile, PATHINFO_EXTENSION));
-
-        echo "<p>type :" . $imageFileType . ".</p>";
-
         if (
             $_FILES['userfile']['type'] != "image/png" &&
             $imageFileType != "jpg" &&
@@ -60,24 +57,59 @@
         }
 
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+
             echo "<p>File is valid, and was successfully uploaded.\n</p>";
+            // get image size and type
+            list($width, $height, $type) = getimagesize($uploadfile);
+            // create image resource based on type
+            switch ($type) {
+                case IMAGETYPE_JPEG:
+                    $src = imagecreatefromjpeg($uploadfile);
+                    break;
+                case IMAGETYPE_PNG:
+                    $src = imagecreatefrompng($uploadfile);
+                    break;
+                case IMAGETYPE_GIF:
+                    $src = imagecreatefromgif($uploadfile);
+                    break;
+                default:
+                    die("Unsupported image type.");
+            }
+            // set maximum dimensions for the thumbnail
+            $maxWidth = 800;
+            $maxHeight = 600;
+            // calculate new dimensions while maintaining aspect ratio
+            if ($width > $height) {
+                // landscape orientation
+                $newWidth = $maxWidth;
+                $newHeight = ($height / $width) * $newWidth;
+            } else {
+                // portrait orientation or square
+                $newHeight = $maxHeight;
+                $newWidth = ($width / $height) * $newHeight;
+            }
+            // create a new true color image
+            $dst = imagecreatetruecolor($newWidth, $newHeight);
+            // resize the image
+            imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            // save the thumbnail
+            $smallName = 'small_' . $photoName;
+            $thumbnailPath = $uploaddir . $smallName;
+            imagejpeg($dst, $thumbnailPath);
+            // free memory
+            imagedestroy($src);
+            imagedestroy($dst);
             $uploadedFilePath = $uploadfile;
         } else {
             echo "<p>Possible file upload attack!\n</p>";
         }
         $submittedText = htmlspecialchars($_POST['text']);
         $currentDate = date("Y-m-d");
-        $_SESSION['submitted_texts'][] = [
-            'text' => $submittedText,
-            'date' => $currentDate,
-            'image' => $uploadedFilePath
-        ];
         $_SESSION['newsCounter']++;
         $newsCounter = $_SESSION['newsCounter'];
         $sql = "INSERT INTO `news` (`id`, `text`, `photoname`, `photodir`, `date`)
-        VALUES ('$newsCounter', '$submittedText', '$photoName', '$uploadedFilePath', '$currentDate')";
+        VALUES ('$newsCounter', '$submittedText', '$smallName', '$thumbnailPath', '$currentDate')";
         $result = $db_obj->query($sql);
-
     }
 
     if (!empty($_SESSION['submitted_texts'])) {

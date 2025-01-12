@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Време на генериране: 30 дек 2024 в 19:59
+-- Време на генериране: 12 яну 2025 в 15:27
 -- Версия на сървъра: 8.0.40-0ubuntu0.24.04.1
 -- Версия на PHP: 8.3.6
 
@@ -40,13 +40,7 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `text`, `photoname`, `photodir`, `date`) VALUES
-(4, 'ddddddd', 'photoName', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30'),
-(5, 'ffffffffff', 'photoName', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30'),
-(6, 'hhhhhh', 'Screenshot from 2024-12-28 17-58-53.png', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30'),
-(100, 'aa', 'photoName', 'path', '2024-12-30'),
-(101, '11', 'photoName', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30'),
-(102, '', 'photoName', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30'),
-(103, 'aa', 'photoName', '../uploads/Screenshot from 2024-12-28 17-58-53.png', '2024-12-30');
+(6, 'Sql Join', 'small_join.png', '../uploads/news/small_join.png', '2025-01-12');
 
 -- --------------------------------------------------------
 
@@ -71,7 +65,7 @@ CREATE TABLE `reg` (
 INSERT INTO `reg` (`salutation`, `firstname`, `lastname`, `usernme`, `email`, `passwort`, `isAdmin`) VALUES
 ('Mr', 'ad', 'ad', 'ad', 'ad@ad', '$2y$10$ZNF.HSmTQmGrRuhYYQcFRejlHyDf14M5kBFCvnBRbKyyjz2.czLPC', 0),
 ('Ms', 'Velichka', 'Georgieva', 'admin', 'admin@admin', '$2y$10$VciUhm6B9Ry6qMtcUWej1uENHDTZb6rTfXfh2771i6nXcAXUakA/u', 1),
-('Mr', 's', 's', 's', 's@s', '$2y$10$jfNLYHeX8V97JyWrbklpDOp5gJezEcGizUy.GEBBg75pP.viB2ose', 0);
+('Mr', 'v', 'v', 'v', 'v@v', '$2y$10$S2Rlxdzstkb1k.GBXJVudezmw3GGz9qldpEVlvGYq8UOv6csrVeYa', 0);
 
 -- --------------------------------------------------------
 
@@ -96,9 +90,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) VALUES
-('2024-12-11', '2024-12-19', 'Yes', 'No', '', 12, 'new', '2024-12-30 00:00:00', ''),
-('2025-01-01', '2025-01-02', 'Yes', 'No', '', 1, 'new', '2024-12-30 19:12:36', ''),
-('2024-12-04', '2024-12-14', 'No', 'Yes', 'a', 13, 'new', '2024-12-30 19:18:48', 's@s');
+('2024-12-04', '2024-12-14', 'No', 'Yes', 'a', 13, 'new', '2024-12-30 19:18:48', 's@s'),
+('2025-01-16', '2025-01-23', 'Yes', 'No', '', 14, 'new', '2025-01-09 09:37:01', 's@s'),
+('2025-01-14', '2025-01-30', 'No', 'No', '', 15, 'new', '2025-01-12 09:33:21', 'v@v'),
+('2025-01-14', '2025-01-23', 'Yes', 'Yes', 'd', 16, 'new', '2025-01-12 09:36:59', 'admin@admin');
 
 --
 -- Indexes for dumped tables
@@ -114,8 +109,13 @@ ALTER TABLE `news`
 -- Индекси за таблица `reg`
 --
 ALTER TABLE `reg`
-  ADD PRIMARY KEY (`usernme`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Индекси за таблица `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

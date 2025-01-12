@@ -35,14 +35,6 @@
         $password = trim($_POST['password']);
         $salutation = trim($_POST['salutation']);
         $errors = [];
-        function debug_to_console($data)
-        {
-            $output = $data;
-            if (is_array($output))
-                $output = implode(',', $output);
-
-            echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-        }
         // the function password_hash() returns a cryptographically secure hash (one-way hashing)
         // first parameter is clear text password, second parameter is hashing algorithm
         // PASSWORD_DEFAULT -> bcrypt algorithm

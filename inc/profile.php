@@ -82,11 +82,12 @@
     <h3>Your Profile</h3>
     <form method="post">
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($firstName); ?>"
+        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($newFirstName); ?>"
             required>
         <br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($lastName); ?>" required>
+        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($newLastName); ?>"
+            required>
         <br>
         <br>
         <br>
