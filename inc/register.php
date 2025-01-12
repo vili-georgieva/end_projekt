@@ -35,8 +35,10 @@
         // password_hash() returns the algorithm, cost and salt as part of the returned hash
         $sq = "select email from " . $tableName . ";";
         $result = $db_obj->query($sq);
-        $existingEmails = $result->fetch_array(MYSQLI_ASSOC);
-        $existingEmails = $existingEmails['email'];
+        $existingEmails = [];
+        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            $existingEmails[] = $row['email'];
+        }
         if (!isEmailUnique($email, $existingEmails)) {
             $errors[] = "Error: Email '$email' is already taken.";
         }
@@ -52,19 +54,12 @@
             header("Location: login.php");
             exit();
         } else {
-            $_SESSION['errors'] = $errors;
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
+            echo '<div class="error-messages text-center border border-danger rounded p-3" style="color: red;">';
+            foreach ($errors as $error) {
+                echo "<p class='font-weight-bold'>$error</p>";
+            }
+            echo '</div>';
         }
-    }
-
-    if (isset($_SESSION['errors'])) {
-        echo '<div class="error-messages">';
-        foreach ($_SESSION['errors'] as $error) {
-            echo "<p class='error'>$error</p>";
-        }
-        echo '</div>';
-        unset($_SESSION['errors']);
     }
     ?>
 
