@@ -8,7 +8,7 @@
         .carousel-item img {
             width: 100%;
             height: 500px;
-            object-fit: cover; 
+            object-fit: cover;
         }
     </style>
 </head>
@@ -29,7 +29,7 @@
                 <img src="res/img/room.webp" alt="room" class="d-block">
             </div>
             <div class="carousel-item">
-                <img src="res/img/hotel9.jpg" alt="Pool" class="d-block">
+                <img src="res/img/hotel5.jpg" alt="Pool" class="d-block">
             </div>
             <div class="carousel-item">
                 <img src="res/img/pool_out.jpg" alt="Outside Pool" class="d-block">
