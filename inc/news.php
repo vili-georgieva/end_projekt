@@ -11,32 +11,10 @@
 
 <body>
     <?php
-
     include 'navigation.php';
     include 'db.php';
     session_start();
     $tableName = 'news';
-    if (!isset($_SESSION['submitted_texts'])) {
-        $_SESSION['submitted_texts'] = [];
-
-        //hardcoded information for discounts and images
-        $_SESSION['submitted_texts'][] = [
-            'text' => '20% Discount on Weekday Bookings!',
-            'image' => '../uploads/news/20.jpg',
-            'date' => '01-01-2024'
-        ];
-        $_SESSION['submitted_texts'][] = [
-            'text' => 'Special Offer: Stay 3 Nights, Get 1 Free!',
-            'image' => '../uploads/news/3nights.webp',
-            'date' => '01-04-2024'
-        ];
-        $_SESSION['submitted_texts'][] = [
-            'text' => 'Family Package: 15% Off for Families!',
-            'image' => '../uploads/news/15.jpg',
-            'date' => '01-06-2024'
-        ];
-    }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $uploaddir = '../uploads/news/';
@@ -103,32 +81,23 @@
         }
         $submittedText = htmlspecialchars($_POST['text']);
         $currentDate = date("Y-m-d");
-        $_SESSION['newsCounter']++;
-        $newsCounter = $_SESSION['newsCounter'];
+        $sql = " SELECT id FROM `news`  ORDER BY ID DESC LIMIT 1";
+        $result = $db_obj->query($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $newsCounter = $row['id'] + 1;
         $sql = "INSERT INTO `news` (`id`, `text`, `photoname`, `photodir`, `date`)
         VALUES ('$newsCounter', '$submittedText', '$smallName', '$thumbnailPath', '$currentDate')";
         $result = $db_obj->query($sql);
     }
+    $sql_all = "SELECT * FROM $tableName ORDER BY id DESC";
+    $result_all = $db_obj->query($sql_all);
 
-    if (!empty($_SESSION['submitted_texts'])) {
+    if (!empty($result_all)) {
         echo '<div class="divUL">';
-        echo "<h2 style='text-align: center;'>All Submitted Texts:</h2>";
+        echo "<h2 style='text-align: center;'>News</h2>";
         echo "<ul>";
-
-        foreach (array_reverse($_SESSION['submitted_texts']) as $entry) {
-            echo "<li>";
-            echo "<p>" . $entry['text'] . "</p>";
-            echo "<p>" . $entry['date'] . "</p>";
-
-            if (!empty($entry['image'])) {
-                echo "<div class='image-container'>";
-                echo "<img class='small-image' src='" . $entry['image'] . "' alt='Uploaded Image' />";
-                echo "</div>";
-            }
-            echo "</li>";
-        }
-        $sql_all = "SELECT * FROM $tableName";
-        $result_all = $db_obj->query($sql_all);
+        // mysqli_fetch_array — Fetch the next row of a result set
+        // the parameter mode allows us to choose between associative, numberic or both arrays
         while ($row = $result_all->fetch_array(MYSQLI_ASSOC)) {
             echo "<li>";
             echo "<p>" . $row['text'] . "</p>";

@@ -77,11 +77,6 @@
             //htmlspecialchars() function in PHP is used to convert special characters to HTML entities
             echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_logged_in']) . "!</h2>";
         } else if (isset($_SESSION['isAdmin'])) {
-            ("isAdmin: " . $_SESSION['isAdmin']);
-            $sql = " SELECT id FROM `news`  ORDER BY ID DESC LIMIT 1";
-            $result = $db_obj->query($sqlName);
-            $row = $result->fetch_array(MYSQLI_ASSOC);
-            $_SESSION['newsCounter'] = $row['id'];
             echo "<h2>Welcome,admin!</h2>";
         }
         ?>

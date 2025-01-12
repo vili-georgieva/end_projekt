@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Време на генериране: 12 яну 2025 в 16:14
+-- Време на генериране: 12 яну 2025 в 22:29
 -- Версия на сървъра: 8.0.40-0ubuntu0.24.04.1
 -- Версия на PHP: 8.3.6
 
@@ -40,7 +40,11 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `text`, `photoname`, `photodir`, `date`) VALUES
-(6, 'Sql Join', 'small_join.png', '../uploads/news/small_join.png', '2025-01-12');
+(1, 'Sql Join', 'small_join.png', '../uploads/news/small_join.png', '2025-01-12'),
+(2, 'Reduce', 'small_20.jpg', '../uploads/news/small_20.jpg', '2025-01-12'),
+(3, '15 % off', 'small_15.jpg', '../uploads/news/small_15.jpg', '2025-01-12'),
+(4, 'path', 'small_path_problem.png', '../uploads/news/small_path_problem.png', '2025-01-12'),
+(5, 'More Joins', 'small_More_Joins.png', '../uploads/news/small_More_Joins.png', '2025-01-12');
 
 -- --------------------------------------------------------
 
@@ -65,7 +69,7 @@ CREATE TABLE `reg` (
 INSERT INTO `reg` (`salutation`, `firstname`, `lastname`, `usernme`, `email`, `passwort`, `isAdmin`) VALUES
 ('Mr', 'ad', 'ad', 'ad', 'ad@ad', '$2y$10$ZNF.HSmTQmGrRuhYYQcFRejlHyDf14M5kBFCvnBRbKyyjz2.czLPC', 0),
 ('Ms', 'Velichka', 'Georgieva', 'admin', 'admin@admin', '$2y$10$VciUhm6B9Ry6qMtcUWej1uENHDTZb6rTfXfh2771i6nXcAXUakA/u', 1),
-('Mr', 'v', 'v', 'v', 'v@v', '$2y$10$S2Rlxdzstkb1k.GBXJVudezmw3GGz9qldpEVlvGYq8UOv6csrVeYa', 0);
+('Mr', 'vaa', 'vaa', 'v', 'v@v', '$2y$10$S2Rlxdzstkb1k.GBXJVudezmw3GGz9qldpEVlvGYq8UOv6csrVeYa', 0);
 
 -- --------------------------------------------------------
 
@@ -90,10 +94,11 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) VALUES
-('2024-12-04', '2024-12-14', 'No', 'Yes', 'done', 13, 'new', '2024-12-30 19:18:48', 's@s'),
+('2024-12-04', '2024-12-14', 'No', 'Yes', 'done', 13, 'in progress', '2024-12-30 19:18:48', 's@s'),
 ('2025-01-16', '2025-01-23', 'Yes', 'No', 'in progress', 14, 'new', '2025-01-09 09:37:01', 's@s'),
 ('2025-01-14', '2025-01-30', 'No', 'No', '', 15, 'done', '2025-01-12 09:33:21', 'v@v'),
-('2025-01-14', '2025-01-23', 'Yes', 'Yes', 'd', 16, 'in progress', '2025-01-12 09:36:59', 'admin@admin');
+('2025-01-14', '2025-01-23', 'Yes', 'Yes', 'd', 16, 'in progress', '2025-01-12 09:36:59', 'admin@admin'),
+('2025-01-16', '2025-01-17', 'Yes', 'No', 'a', 17, 'done', '2025-01-12 18:53:02', 'v@v');
 
 --
 -- Indexes for dumped tables
