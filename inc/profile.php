@@ -65,11 +65,23 @@
             // returns true if password matches
             $isPasswordCorrect = password_verify($oldPassword, $row['passwort']);
             if (!$isPasswordCorrect) {
-                echo "<p class='error'>Error: Old password is incorrect.</p>";
+                echo '<div class="error-messages text-center border border-danger rounded p-3" style="color: red;">';
+                echo "<p class='font-weight-bold'>";
+                echo "Error: Old password is incorrect.";
+                echo "</p>";
+                echo '</div>';
             } elseif ($newPassword !== $repeatNewPassword) {
-                echo "<p class='error'>Error: New passwords do not match.</p>";
+                echo '<div class="error-messages text-center border border-danger rounded p-3" style="color: red;">';
+                echo "<p class='font-weight-bold'>";
+                echo "Error: New passwords do not match.";
+                echo "</p>";
+                echo '</div>';
             } else {
-                echo "<p>Password changed successfully!</p>";
+                echo '<div class="success-messages text-center border border-success rounded p-3" style="color: green;">';
+                echo "<p class='font-weight-bold'>";
+                echo "Password changed successfully!";
+                echo "</p>";
+                echo '</div>';
                 $hashToStoreInDb = password_hash($newPassword, PASSWORD_DEFAULT);
                 $sql = "UPDATE `reg` SET passwort='$hashToStoreInDb' WHERE email='$email'";
                 $result = $db_obj->query($sql);

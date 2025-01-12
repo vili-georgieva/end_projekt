@@ -32,7 +32,7 @@
             ];
             $_SESSION['co']++;
             $counter = $_SESSION['co'];
-            echo "<h2>Reservation successfully created.</h2>";
+            echo "<h2 class='text-center'>Reservation successfully created.</h2>";
             if ($_SESSION['isAdmin']) {
                 $email = $_SESSION['admin_email'];
             } else {
@@ -44,8 +44,13 @@
             //echo $check_in_date;
             $result = $db_obj->query($sql);
         } else {
+            echo '<div class="error-messages text-center border border-danger rounded p-3" style="color: red;">';
+            echo "<p class='font-weight-bold'>";
             echo "Error: Check-out date must be later than check-in date.";
+            echo "</p>";
+            echo '</div>';
         }
+
     }
     ?>
     <h2 style='text-align: center;'>Create a New Room Reservation</h2>
