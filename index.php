@@ -3,10 +3,20 @@
 
 <?php include 'inc/head.php'; ?>
 
+<head>
+    <style>
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover; 
+        }
+    </style>
+</head>
+
 <body>
     <?php include './inc/navigation.php'; ?>
 
-    <div id="hotelpics" class="carousel slide mt-3" data-bs-ride="carousel" style="">
+    <div id="hotelpics" class="carousel slide mt-3" data-bs-ride="carousel">
 
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#hotelpics" data-bs-slide-to="0" class="active"></button>
@@ -16,13 +26,13 @@
 
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="res\img\room.webp" alt="room" class="d-block" style="width:100%">
+                <img src="res/img/room.webp" alt="room" class="d-block">
             </div>
             <div class="carousel-item">
-                <img src="res\img\pool.jpg" alt="Pool" class="d-block" style="width:100%">
+                <img src="res/img/hotel9.jpg" alt="Pool" class="d-block">
             </div>
             <div class="carousel-item">
-                <img src="res\img\pool_out.jpg" alt="Outside Pool" class="d-block" style="width:100%">
+                <img src="res/img/pool_out.jpg" alt="Outside Pool" class="d-block">
             </div>
         </div>
 

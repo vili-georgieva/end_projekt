@@ -12,14 +12,10 @@
 <body>
 
     <?php include 'navigation.php'; ?>
-
+    <h1 class="text-center">Login</h1>
     <div class="login-container">
-        <h1>Login</h1>
-
         <?php
         session_start();
-
-
         $tableName = 'reg';
         require_once('../config/dbaccess.php'); //to retrieve connection details
         $db_obj = new mysqli($host, $user, $password, $database);
@@ -74,19 +70,20 @@
                 echo "test";
                 $emailFound = false;
                 $isPasswordCorrect = false;
+                // password_hash() returns the algorithm, cost and salt as part of the returned hash
                 $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 debug_to_console($password_hash);
                 echo $password_hash;
                 echo "test";
                 foreach ($rows as $row) {
                     if ($row['email'] === $email) {
+                        // verifies that a password matches a hash
                         $isPasswordCorrect = password_verify($_POST['password'], $row['passwort']);
                         if ($isPasswordCorrect) {
                             $emailFound = true;
                             $isPasswordCorrect = true;
                             break;
                         }
-
                     }
                 }
                 $isAdmin = $result_isAdmin->fetch_array(MYSQLI_ASSOC);
@@ -97,15 +94,14 @@
                     } else {
                         $_SESSION['user_logged_in'] = $email;
                     }
-                    // TODO
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    //exit();
+                    header('Location: profile.php');
+                    exit();
                 } else {
                     debug_to_console("invalid credentials");
                     $errors[] = "Invalid email or password.";
                     $_SESSION['login_errors'] = "Invalid emaiil or password.";
                     header("Location: " . $_SERVER['PHP_SELF']);
-                    //exit();
+                    exit();
                 }
             }
         }

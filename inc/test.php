@@ -1,66 +1,107 @@
-<?php
-session_start();
-$currentDir = dirname($_SERVER['SCRIPT_FILENAME']);
-if (strpos($currentDir, 'inc') !== false) {
-    $cssPath = '../';
-    $menuPath = '';
-} else {
-    $cssPath = '';
-    $menuPath = 'inc/';
-}
-$isLoggedIn = isset($_SESSION['user_logged_in']);
-$isAdmin = isset($_SESSION['isAdmin']) === true;
-?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Navigation</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            /* Center the images */
+            align-items: center;
+            /* Align images vertically */
+        }
 
-    <link rel="stylesheet" href="<?php echo $cssPath; ?>res/css/navigation.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        .photo {
+            margin: 10px;
+            /* Space between images */
+        }
+
+        img {
+            width: 300px;
+            /* Set a fixed width */
+            height: 200px;
+            /* Set a fixed height */
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the area */
+        }
+    </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+    <?php include 'navigation.php'; ?>
+    <div class="impressum-photo">
+        <div class="container">
+            <div class="card mx-2" style="max-width: 250px;">
+                <img src="..\res\img\impressum_vili.jpg" alt="Team member Velichka Georgieva" class="card-img-top mx-auto d-block">
+                <div class="card-body">
+                    <h4 class="card-title">Velichka Georgieva</h4>
+                    <p class="card-text">Team member</p>
+                    <a href="mailto:if24b265@technikum-wien.at" class="btn btn-primary">Send me a mail</a>
+                </div>
+            </div>
+            <div class="card mx-2" style="max-width: 250px;">
+                <img src="..\res\img\impressum_fpm.webp" alt="Team member Filipe Portela Millinger" class="card-img-top mx-auto d-block">
+                <div class="card-body">
+                    <h4 class="card-title">Filipe Portela Millinger</h4>
+                    <p class="card-text">Team member</p>
+                    <a href="mailto:if23b116@technikum-wien.at" class="btn btn-primary">Send me a mail</a>
+                </div>
+            </div>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+    </div>
+   
+
+
+
+    <div class="impressum-content">
+        <h1>Impressum</h1>
+        <p>Hotel Wellness GmbH <br>
+            Teststraße 12, 1234 Muster</p>
+        <h2>Contact Support</h2>
+        <p>If you need more help, please reach out to us:</p>
+        <p>Name: Velichka Georgieva</p>
+        <p>Email: <a href="mailto:if24b265@technikum-wien.at">if24b265@technikum-wien.at</a></p>
+        <p>Name: Filipe Portela Millinger</p>
+        <p>Email: <a href="mailto:if23b112@technikum-wien.at">if24b265@technikum-wien.at</a></p>
+        <p>Our support team is available 24/7 to assist you.</p>
+    </div>
+
+    <div class="impressum-details">
+        <h2>Legal Notice</h2>
+        <p>UID-Nummer UID-Nr: ATU12345678 <br>
+            Firmenbuchnummer FN: 1234567 <br>
+            Firmenbuchgericht: Musterstadt <br>
+            Firmensitz: XXXX Musterdorf <br>
+            Musterstraße 12 | Austria <br>
+            Mitglied der WKÖ, ÖHV</p>
+    </div>
+
+
+
+    <div>
+        <p> Tel: +43 XXX XXXX <br>
+            E-Mail: <a href="mailto:hotelwellness@muster.mann">max@muster.mann</a></p>
+    </div>
+    <hr>
+
+    <footer>
+        <p style="color: red;">Verbraucher haben die Möglichkeit,
+            Beschwerden an die Online-Streitbeilegungsplattform der EU zu richten:
+            <a href="http://ec.europa.eu/odr">Online-Streitbeilegung</a> <br>
+            Sie können allfällige Beschwerde auch an
+            die oben angegebene E-Mail-Adresse richten.
+        </p>
+    </footer>
+
 </body>
 
-</html>
+</html>"

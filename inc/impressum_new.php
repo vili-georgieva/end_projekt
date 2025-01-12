@@ -14,23 +14,23 @@
         .container {
             display: flex;
             justify-content: center;
-            /* Center the images */
             align-items: center;
-            /* Align images vertically */
         }
 
         .photo {
             margin: 10px;
-            /* Space between images */
         }
 
         img {
             width: 300px;
-            /* Set a fixed width */
             height: 200px;
-            /* Set a fixed height */
             object-fit: cover;
-            /* Maintain aspect ratio and cover the area */
+        }
+
+        .impressum-content,
+        .impressum-details {
+            text-align: center;
+            margin: 20px;
         }
     </style>
 </head>
@@ -58,40 +58,34 @@
             </div>
         </div>
     </div>
-   
 
+    <div class="impressum-content text-center">
+    <h1>Impressum</h1>
+    <p>Hotel Wellness GmbH <br>
+        Teststraße 12, 1234 Muster</p>
+    <h2>Contact Support</h2>
+    <p>If you need more help, please reach out to us:</p>
+    <p>Name: Velichka Georgieva</p>
+    <p>Email: <a href="mailto:if24b265@technikum-wien.at">if24b265@technikum-wien.at</a></p>
+    <p>Phone: +43 123 456789</p> 
+    <p>Name: Filipe Portela Millinger</p>
+    <p>Email: <a href="mailto:if23b112@technikum-wien.at">if23b112@technikum-wien.at</a></p>
+    <p>Phone: +43 987 654321</p> 
+    <p>Our support team is available 24/7 to assist you.</p>
+</div>
 
-
-    <div class="impressum-content">
-        <h1>Impressum</h1>
-        <p>Hotel Wellness GmbH <br>
-            Teststraße 12, 1234 Muster</p>
-        <h2>Contact Support</h2>
-        <p>If you need more help, please reach out to us:</p>
-        <p>Name: Velichka Georgieva</p>
-        <p>Email: <a href="mailto:if24b265@technikum-wien.at">if24b265@technikum-wien.at</a></p>
-        <p>Name: Filipe Portela Millinger</p>
-        <p>Email: <a href="mailto:if23b112@technikum-wien.at">if24b265@technikum-wien.at</a></p>
-        <p>Our support team is available 24/7 to assist you.</p>
-    </div>
 
     <div class="impressum-details">
         <h2>Legal Notice</h2>
         <p>UID-Nummer UID-Nr: ATU12345678 <br>
             Firmenbuchnummer FN: 1234567 <br>
             Firmenbuchgericht: Musterstadt <br>
-            Firmensitz: XXXX Musterdorf <br>
+            Firmensitz: XXXX Musterdorf<br>
             Musterstraße 12 | Austria <br>
             Mitglied der WKÖ, ÖHV</p>
     </div>
 
-
-
-    <div>
-        <p> Tel: +43 XXX XXXX <br>
-            E-Mail: <a href="mailto:hotelwellness@muster.mann">max@muster.mann</a></p>
-    </div>
-    <hr>
+  
 
     <footer>
         <p style="color: red;">Verbraucher haben die Möglichkeit,

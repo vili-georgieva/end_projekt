@@ -21,13 +21,10 @@
         echo "Connection Error: " . $db_obj->connect_error;
         exit();
     }
-    if (!isset($_SESSION['registeredUsers'])) {
-        $_SESSION['registeredUsers'] = [];
-    }
 
-    function isUsernameUnique($username, $registeredUsers)
+    function isEmailUnique($newEmail, $registeredUsers)
     {
-        return !in_array($username, $registeredUsers);
+        return !in_array($newEmail, $registeredUsers);
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,32 +43,34 @@
 
             echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
         }
-       
+        // the function password_hash() returns a cryptographically secure hash (one-way hashing)
+        // first parameter is clear text password, second parameter is hashing algorithm
+        // PASSWORD_DEFAULT -> bcrypt algorithm
         $hashToStoreInDb = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        //echo $hashToStoreInDb;
-        debug_to_console($hashToStoreInDb);
-
-        if (!isUsernameUnique($username, $_SESSION['registeredUsers'])) {
-            $errors[] = "Error: Username '$username' is already taken.";
+        // password_hash() returns the algorithm, cost and salt as part of the returned hash
+        $sq = "select email from " . $tableName . ";";
+        $result = $db_obj->query($sq);
+        $existingEmails = $result->fetch_array(MYSQLI_ASSOC);
+        $existingEmails = $existingEmails['email'];
+        if (!isEmailUnique($email, $existingEmails)) {
+            $errors[] = "Error: Email '$email' is already taken.";
         }
 
         if (empty($errors)) {
-            $_SESSION['registeredUsers'][] = $username;
-
+            $sq = "INSERT INTO $tableName 
+            (`salutation`, `firstname`, `lastname`,
+             `usernme`, `email`, `passwort`, `isAdmin`) VALUES 
+             ('$salutation', '$firstName', '$lastName', '$username', 
+             '$email', '$hashToStoreInDb', '0')";
+            $result = $db_obj->query($sq);
             echo "<p>User '$username' registered successfully!</p>";
+            header("Location: login.php");
+            exit();
         } else {
             $_SESSION['errors'] = $errors;
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }
-       
-        $sq = "INSERT INTO $tableName 
-        (`salutation`, `firstname`, `lastname`,
-         `usernme`, `email`, `passwort`, `isAdmin`) VALUES 
-         ('$salutation', '$firstName', '$lastName', '$username', 
-         '$email', '$hashToStoreInDb', '0')";
-        $result = $db_obj->query($sq);
-       
     }
 
     if (isset($_SESSION['errors'])) {

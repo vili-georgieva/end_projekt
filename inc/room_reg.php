@@ -1,56 +1,3 @@
-<?php
-session_start();
-include 'navigation.php';
-$tableName = 'reg';
-require_once('../config/dbaccess.php'); //to retrieve connection details
-$db_obj = new mysqli($host, $user, $password, $database);
-if ($db_obj->connect_error) {
-    echo "Connection Error: " . $db_obj->connect_error;
-    exit();
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $check_in_date = $_POST['check_in_date'];
-    $check_out_date = $_POST['check_out_date'];
-    $breakfast = isset($_POST['breakfast']) ? 'Yes' : 'No';
-    $parking = isset($_POST['parking']) ? 'Yes' : 'No';
-    $pets = $_POST['pets'] ?? 'None';
-
-    //$pets = $_POST['pets'];
-    if (strtotime($check_out_date) > strtotime($check_in_date)) {
-        $currentDate = date("Y-m-d H:i:s");
-        $_SESSION['reservations'][] = [
-            'check_in_date' => $check_in_date,
-            'check_out_date' => $check_out_date,
-            'breakfast' => $breakfast,
-            'parking' => $parking,
-            'pets' => $pets,
-            'status' => 'new',
-            //'date' => $currentDate
-        ];
-        $_SESSION['co']++;
-        $counter = $_SESSION['co'];
-        echo "<h2>Reservation successfully created.</h2>";
-        //echo $check_in_date, $check_out_date, $breakfast, $parking, $pets;
-        //$sq = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`) 
-        //VALUES ('2022-10-10', '2022-11-12', 'a', '$parking' , 'a')";
-        if ($_SESSION['isAdmin']) {
-            $email = $_SESSION['admin_email'];
-        } else {
-            $email = $_SESSION['user_logged_in'];
-        }
-        $sql = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) 
-        VALUES ('$check_in_date', '$check_out_date', 
-        '$breakfast', '$parking', '$pets',  '$counter', 'new', '$currentDate', '$email')";
-        //echo $check_in_date;
-        $result = $db_obj->query($sql);
-        //echo "aaaa";
-
-    } else {
-        echo "Error: Check-out date must be later than check-in date.";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -61,6 +8,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
+    <?php
+    session_start();
+    include 'navigation.php';
+    $tableName = 'reg';
+    require_once('../config/dbaccess.php'); //to retrieve connection details
+    $db_obj = new mysqli($host, $user, $password, $database);
+    if ($db_obj->connect_error) {
+        echo "Connection Error: " . $db_obj->connect_error;
+        exit();
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $check_in_date = $_POST['check_in_date'];
+        $check_out_date = $_POST['check_out_date'];
+        $breakfast = isset($_POST['breakfast']) ? 'Yes' : 'No';
+        $parking = isset($_POST['parking']) ? 'Yes' : 'No';
+        $pets = $_POST['pets'] ?? 'None';
+
+        //$pets = $_POST['pets'];
+        if (strtotime($check_out_date) > strtotime($check_in_date)) {
+            $currentDate = date("Y-m-d H:i:s");
+            $_SESSION['reservations'][] = [
+                'check_in_date' => $check_in_date,
+                'check_out_date' => $check_out_date,
+                'breakfast' => $breakfast,
+                'parking' => $parking,
+                'pets' => $pets,
+                'status' => 'new',
+                //'date' => $currentDate
+            ];
+            $_SESSION['co']++;
+            $counter = $_SESSION['co'];
+            echo "<h2>Reservation successfully created.</h2>";
+            //echo $check_in_date, $check_out_date, $breakfast, $parking, $pets;
+            //$sq = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`) 
+            //VALUES ('2022-10-10', '2022-11-12', 'a', '$parking' , 'a')";
+            if ($_SESSION['isAdmin']) {
+                $email = $_SESSION['admin_email'];
+            } else {
+                $email = $_SESSION['user_logged_in'];
+            }
+            $sql = "INSERT INTO `rooms` (`checkin`, `checkout`, `breakfast`, `parking`, `pets`, `id`, `status`, `date`, `email`) 
+        VALUES ('$check_in_date', '$check_out_date', 
+        '$breakfast', '$parking', '$pets',  '$counter', 'new', '$currentDate', '$email')";
+            //echo $check_in_date;
+            $result = $db_obj->query($sql);
+            //echo "aaaa";
+    
+        } else {
+            echo "Error: Check-out date must be later than check-in date.";
+        }
+    }
+    ?>
     <h2>Create a New Room Reservation</h2>
     <form method="POST">
         <label for="check_in_date">Check-in Date:</label>

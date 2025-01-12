@@ -51,31 +51,31 @@
             $sql = "UPDATE `reg` SET firstname='$newFirstName', lastname ='$newLastName' WHERE email='$email'";
             $result = $db_obj->query($sql);
         } elseif (isset($_POST['change_password'])) {
+            // trim is used to remove whitespace (or other specified characters) from beginning and end
             $oldPassword = trim($_POST['old_password']);
             $newPassword = trim($_POST['new_password']);
             $repeatNewPassword = trim($_POST['repeat_new_password']);
-
-            //
-    
-
-
-            //echo "first : ". $firstName . $lastName;
-            //
+            // SQL query for selecting the password for specific email
             $sq = "SELECT passwort FROM `reg` WHERE email='$email'";
+            // run the query
             $result = $db_obj->query($sq);
+            // convert the result variable to associative array
+            // key - value pair instead of int index
             $row = $result->fetch_array(MYSQLI_ASSOC);
-            $currentPass = $row['passwort'];
-            if ($oldPassword !== $currentPass) {
+            // php function which verifies that a password matches a hash
+            // returns true if password matches
+            $isPasswordCorrect = password_verify($oldPassword, $row['passwort']);
+            if (!$isPasswordCorrect) {
                 echo "<p class='error'>Error: Old password is incorrect.</p>";
             } elseif ($newPassword !== $repeatNewPassword) {
                 echo "<p class='error'>Error: New passwords do not match.</p>";
             } else {
                 echo "<p>Password changed successfully!</p>";
-                $sql = "UPDATE `reg` SET passwort='$newPassword' WHERE email='$email'";
+                $hashToStoreInDb = password_hash($newPassword, PASSWORD_DEFAULT);
+                $sql = "UPDATE `reg` SET passwort='$hashToStoreInDb' WHERE email='$email'";
                 $result = $db_obj->query($sql);
             }
         }
-
     }
     ?>
 

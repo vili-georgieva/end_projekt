@@ -12,7 +12,7 @@
 <?php include 'navigation.php'; ?>
 
 <div class="help-container">
-    <h1>Help Page</h1>
+<h1 class="text-center">Help Page</h1>
     
     <div class="help-content">
         <h2>How the Website Works</h2>
